@@ -7,6 +7,51 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <!-- Highscores link -->
+        <section class = "topSection">
+            <a class="scores" href="highscores.html">High Scores List</a>
+            <!-- timer -->
+            <p class="time">Time Left: 75</p>
+        </section>
+    </header>
+
+    <div class="wrapper">
+        <section id="startScreen">
+            <h2>Code Quiz</h2>
+            <p id="instructions">This is a timed quiz. See how fast you can make it through the quiz. Be carful with your answers, because for every wrong answer you will loose time. Click Start to begin.</p>
+            <button id = "start">Start</button>
+        </section>
+        
+        
+        <section class="questions" style="display: none">
+            <h2></h2>
+            <ul class = "answerList"></ul>
+        </section>
+        
+        
+        <section class="endScreen" style="display: none">
+            <h2>All Done!</h2>
+            <p></p>
+            <form class="getInitials">
+                <Label>Enter your initials: </Label>
+                <input type="text" class="initials">
+                <button>Submit</button>
+            </form>
+        </section>
+        
+        <section class="highScores" style="display: none">
+            <h2>High Scores</h2>
+            <ul class = "hsList"></ul>
+            <button id="goBack">Go Back</button>
+            <button id="clear">Clear Scores</button>
+        </section>
+
+        <footer style="display: none">
+            <hr>
+            <p></p>
+        </footer>
+    </div>
     <!-- initially need description of game -->
     <!-- instructions -->
     <!-- start quiz button -->
