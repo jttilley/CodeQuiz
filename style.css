@@ -2,8 +2,65 @@
 /* need styling for correct or incorrect text */
 /* need timer top right */
 /* need hichscores link top left */
-
+body {
+    /* background-color: rgb(62, 190, 207) ; */
+}
 
 ul {
     list-style-type: none;
+}
+
+.hsList {
+    background-color: blueviolet;
+    border-width: 5px;
+    border-color: rgb(52, 187, 187);
+    color: white;
+    /* padding-top: 5px; */
+    border-radius: 5px;
+    border-style: ridge;
+    box-shadow: 10px 5px 5px black;
+}
+
+.hsList p {
+    text-align: center;
+    font-size: 24px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+section {
+    display: block;
+    width: 66.66666%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.scores {
+    color: blue;
+    text-decoration: underline;
+}
+
+button {
+    color: white;
+    background-color: blueviolet;
+    box-shadow: 5px 5px 5px grey;
+    margin-top: 20px;
+}
+
+.answers {
+    width: 200px;
+    margin: 10px auto 0 auto;
+}
+
+footer {
+    text-align: center;
+    color: white;
+    
+}
+
+footer p {
+    box-shadow: 5px 5px 5px black;
 }

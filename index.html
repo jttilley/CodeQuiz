@@ -8,71 +8,68 @@
 </head>
 <body>
     <header>
-        <!-- Highscores link -->
-        <section class = "topSection">
-            <a class="scores" href="highscores.html">High Scores List</a>
-            <!-- timer -->
-            <p class="time">Time Left: 75</p>
-        </section>
+        <!-- need a button to View highscores top left -->
+        <div class="scores">High Scores List</div>
+        <!-- need the timer top right -->
+        <div class="time">Time Left: 75</div>
     </header>
-
+    
     <div class="wrapper">
+        <!-- initially need description of game -->
         <section id="startScreen">
             <h2>Code Quiz</h2>
+            <!-- instructions -->
             <p id="instructions">This is a timed quiz. See how fast you can make it through the quiz. Be carful with your answers, because for every wrong answer you will loose time. Click Start to begin.</p>
+            <!-- start quiz button -->
             <button id = "start">Start</button>
         </section>
         
         
         <section class="questions" style="display: none">
+            <!-- need an h2 or h3 for question  -->
             <h2></h2>
+            <!-- need buttons for answers -->
             <ul class = "answerList"></ul>
         </section>
         
         
+        <!-- when quiz is complete  -->
         <section class="endScreen" style="display: none">
+            <!-- show all done in h2 -->
             <h2>All Done!</h2>
+            <!-- show score -->
             <p></p>
-            <form class="getInitials">
+            <form class="initialsForm">
                 <Label>Enter your initials: </Label>
+                <!-- need input box for initials -->
                 <input type="text" class="initials">
-                <button>Submit</button>
+                <!-- submit button to save score and initals -->
+                <br>
+                <button type="submit">Submit</button>
             </form>
         </section>
         
+        <!-- then jump to High scores page -->
         <section class="highScores" style="display: none">
+            <!-- list high scores -->
             <h2>High Scores</h2>
-            <ul class = "hsList"></ul>
+            <ol class = "hsList"></ol>
+            <!-- need button for go back -->
             <button id="goBack">Go Back</button>
+            <!-- need button for clear high scores -->
             <button id="clear">Clear Scores</button>
         </section>
 
         <footer style="display: none">
+            <!-- need <hr> seperater before the correct or wrong -->
             <hr>
+            <!-- need the correct or wrong text below line -->
             <p></p>
         </footer>
     </div>
-    <!-- initially need description of game -->
-    <!-- instructions -->
-    <!-- start quiz button -->
 
-    <!-- need a button to View highscores top left -->
-    <!-- need the timer top right -->
-    <!-- need an h2 or h3 for question  -->
-    <!-- need buttons for answers -->
-    <!-- need <hr> seperater before the correct or wrong -->
-    <!-- need the correct or wrong text below line -->
 
-    <!-- when game complete  -->
-    <!-- show all done in h3 -->
-    <!-- show score -->
-    <!-- need input box for initials -->
-    <!-- submit button to save score and initals -->
 
-    <!-- then jump to High scores page -->
-    <!-- list high scores -->
-    <!-- need button for go back -->
-    <!-- need button for clear high scores -->
 
     <script src="script.js"></script>
 </body>
