@@ -23,9 +23,9 @@ var backB = highscoresEl.querySelector("#goBack")
 
 
 // turn off unneeded sections for start
-// questionsEl.style.display = "none";
-// endScreenEl.style.display = "none";
-// highscoresEl.style.display = "none";
+
+
+
 
 var allScores = JSON.parse(localStorage.getItem("highscores"));
 // console.log("allScores", allScores)
@@ -39,7 +39,7 @@ if (!allScores) {
 var quiz = [
     {
         "question":"How do you campare to see if something is exactly equal to something else?",
-        "answers":["=","==","===","===="],
+        "answers":["=","==","===","====","equals"],
         "correct":2
     },
     {
@@ -49,13 +49,18 @@ var quiz = [
     },
     {
         "question":"How can you increment a count by 1?",
-        "answers":["count++","count += 1","count = count + 1","All of the above"],
+        "answers":["count++","count += 1","count = count + 1","All of the above","It's not possible","None of the above","I'd like to call a life line"],
         "correct":3
     },
     {
         "question":"How can you search a string for some text?",
         "answers":["string.find('search')","string.matches('search')","string.instr('search')","string.getstr('search')"],
         "correct":1
+    },
+    {
+        "question":"What is needed to create a variable?",
+        "answers":["var","log","const","All of the above","None of the above"],
+        "correct":3
     },
     {
         "question":"What element type can you use the 'submit' event on?",
@@ -67,12 +72,34 @@ var quiz = [
 
 // var quiz = [q1,q2,q3];
 var curQuestion = 0;
-var countDown = 75;
+var countDown = 60;
 var timerInterval;
 
 console.log(quiz);
 
+function setScreen(screenElement) {
+    //turn off all
+    startScreen.style.display = "none"; // hide questions section
+    questionsEl.style.display = "none"; // hide questions section
+    endScreenEl.style.display = "none"; // show end section
+    highscoresEl.style.display = "none";
+    // turn on passed in section
+    screenElement.style.display = "block"    
+}
+
+function stopQuiz(){
+    // stop timer
+    clearInterval(timerInterval);
+    // clear previous question
+    clearQuestion();
+}
+
+// when High Scores List is clicked
 scores.addEventListener("click", function() {
+    //stop the quiz in case it was pressed in the middle of the quiz
+    stopQuiz();
+
+    //show highscore
     showHighscores();
 })
 
@@ -87,23 +114,22 @@ function updateTimer() {
 
 // to set a timer when starting quiz and ending when time is up or quiz is finished
 function timeQuiz() {
-    // Create the countdown timer.
-    countDown = 75;
+    // reset countdown and questions
+    countDown = 60;
     curQuestion = 0;
-
+    
+    // Create the countdown timer.
     // start timer
     timerInterval = setInterval(function() {
         countDown--;
         updateTimer();
         
         if(countDown <= 0) {
-            clearInterval(timerInterval);
+            stopQuiz();
             timer.textContent = "Time Left: 0";
             countDown = 0;
             endScreen();
         }
-        
-        // console.log("timerInterval -> countDown", countDown)
         
     }, 1000);
     
@@ -113,8 +139,7 @@ function timeQuiz() {
 //show quiz and setup initial question
 function runQuiz() {
     // startScreen.classList.add("hide");
-    startScreen.style.display = "none";
-    questionsEl.style.display = "block";
+    setScreen(questionsEl);
     setQuestion(curQuestion);
 }
 
@@ -147,8 +172,6 @@ function setQuestion(index) {
 
 function clearQuestion() {
     // Clear finished question
-    // console.log("clearQuestion -> ul.childNodes", ul.childNodes)
-    // console.log("clearQuestion -> ul.children", ul.children)
     for (i = ul.childNodes.length - 1; i >= 0 ; i--) {
         ul.removeChild(ul.childNodes[i]);
     }
@@ -193,6 +216,9 @@ questionsEl.addEventListener("click", function(event) {
             fP.style.backgroundColor = "red";
             fP.textContent = "Wrong!";
             countDown -= 10;
+            if (countDown < 0) {
+                countDown = 0;
+            }
             updateTimer(); 
         }
         
@@ -200,21 +226,25 @@ questionsEl.addEventListener("click", function(event) {
         curQuestion++;
         // console.log("curQuestion", curQuestion)
         
+        clearQuestion();
         if (curQuestion < quiz.length) {
-            clearQuestion();
             setQuestion(curQuestion);
         } else {
-            clearInterval(timerInterval);
-            clearQuestion();
+            
+            stopQuiz();
             endScreen();
         }
     }
 })
 
+
 // funciton to save initials and score
 function endScreen() {
-    questionsEl.style.display = "none"; // hide questions section
-    endScreenEl.style.display = "block"; // show end section
+    setScreen(endScreenEl);
+    if (countDown < 0) {
+        countDown = 0;
+        updateTimer();
+    }
 }
 
 // listen for submit click or enter
@@ -246,12 +276,7 @@ initsForm.addEventListener("submit", function(event) {
 
 // function to display high scores
 function showHighscores() {
-    startScreen.style.display = "none"; // hide start screen
-    questionsEl.style.display = "none"; // hide questions section
-    endScreenEl.style.display = "none"; // hide end section
-    highscoresEl.style.display = "block"; // show high scores
-
-
+    setScreen(highscoresEl);
 
     // create list of initals and scores
     allScores.forEach(function(person) {
@@ -284,9 +309,6 @@ function clearHSList() {
 // function to go back
 backB.addEventListener("click", function() {
     // turn off unneeded sections for start
-    questionsEl.style.display = "none";
-    endScreenEl.style.display = "none";
-    highscoresEl.style.display = "none";
-    startScreen.style.display = "block";
+    setScreen(startScreen);
     clearHSList();
 })
